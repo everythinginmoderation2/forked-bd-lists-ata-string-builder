@@ -1,5 +1,6 @@
 package com.amazon.ata.lists.stringbuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class ATAStringBuilder {
      */
     public ATAStringBuilder() {
         // PARTICIPANTS - initialize here
+        this.value = new ArrayList<>();
     }
 
     /**
@@ -29,6 +31,8 @@ public class ATAStringBuilder {
      */
     public ATAStringBuilder(String initialString) {
         // PARTICIPANTS - initialize here
+        this();
+        this.append(initialString);
     }
 
     /**
@@ -41,7 +45,7 @@ public class ATAStringBuilder {
      */
     public int length() {
         // PARTICIPANTS - implement here
-        return -1;
+        return this.value.size();
     }
 
     /**
@@ -59,6 +63,12 @@ public class ATAStringBuilder {
      */
     public ATAStringBuilder append(String str) {
         // PARTICIPANTS - implement here
+        if (str == null) {
+            str = "null";
+        }
+        for (int i = 0; i < str.length(); i++) {
+            this.value.add(str.charAt(i));
+        }
         return this;
     }
 
@@ -78,6 +88,10 @@ public class ATAStringBuilder {
      */
     public ATAStringBuilder insert(int offset, char c) {
         // PARTICIPANTS - implement here
+        if (offset < 0 || offset > this.length()) {
+            throw new IndexOutOfBoundsException("Offset is out of bounds");
+        }
+        this.value.add(offset, c);
         return this;
     }
 
@@ -98,7 +112,10 @@ public class ATAStringBuilder {
      */
     public char charAt(int index) {
         // PARTICIPANTS - implement here
-        return ' ';
+        if (index < 0 || index > this.length()) {
+            throw new IndexOutOfBoundsException("Index is out of bounds");
+        }
+        return this.value.get(index);
     }
 
     /**
